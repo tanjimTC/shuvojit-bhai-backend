@@ -31,6 +31,10 @@ app.use((req, res, next) => {
   next(err);
 });
 
+app.get("/ping", (req, res) => {
+  res.send("api is live");
+});
+
 // Error handler function
 app.use((err, req, res, next) => {
   const error = app.get("env") === "development" ? err : {};
