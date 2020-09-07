@@ -46,6 +46,14 @@ app.use((err, req, res, next) => {
   console.error(err);
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
 // Start the server
 app.listen(port, () =>
   console.log(`Listening to port http://localhost:${port}`)
