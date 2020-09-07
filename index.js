@@ -19,7 +19,6 @@ const blogs = require("./routes/blogs");
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/static", express.static("public"));
 
 // Routes
 app.use("/users", users);
