@@ -19,6 +19,7 @@ const blogs = require("./routes/blogs");
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/static", express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/users", users);
@@ -46,9 +47,17 @@ app.use((err, req, res, next) => {
   console.error(err);
 });
 
-app.get("*", function (req, res) {
-  res.sendFile(__dirname + "/path/to/index.html");
-});
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
+
+// app.get("*", (request, response) => {
+//   response.sendFile(path.join(__dirname, "client/build", "index.html"));
+// });
+
+// app.get("*", function (req, res) {
+//   res.sendFile(__dirname + "/path/to/index.html");
+// });
 
 // Start the server
 app.listen(port, () =>
