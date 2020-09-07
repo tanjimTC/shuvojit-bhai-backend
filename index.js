@@ -3,11 +3,18 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+require("dotenv").config();
 const port = process.env.PORT || 4000;
 
-mongoose.connect("mongodb://localhost/blogProject", {
+const uri = process.env.DB_PATH;
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+mongoose.connection.on("connected", () => {
+  console.log("connected");
 });
 
 const app = express();
