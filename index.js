@@ -46,12 +46,8 @@ app.use((err, req, res, next) => {
   console.error(err);
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "client/build", "index.html"));
+app.get("*", function (req, res) {
+  res.sendFile(__dirname + "/path/to/index.html");
 });
 
 // Start the server
